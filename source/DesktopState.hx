@@ -29,16 +29,14 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import flixel.util.FlxSpriteUtil;
 import lime.app.Application;
+import openfl.utils.Assets as OpenFlAssets;
 import openfl.Assets;
 import flash.geom.Point;
 
 #if windows
 import Discord.DiscordClient;
-import Sys;
-import sys.FileSystem;
 #end
 
 #if cpp
@@ -173,10 +171,8 @@ class DesktopState extends MusicBeatState
 			} else {
 				if (Highscore.getMissesString(songHighscore, 2) != '0')
 					goldFolderCheck = false;
-				if (FileSystem.exists(Paths.instEXcheck(data[0]))) {
 					if (Highscore.getMissesString(songHighscore, 3) != '0')
 						goldFolderCheck = false;
-				}
 			}
 		}
 		songsUnlocked[0] = true;
@@ -459,7 +455,7 @@ class DesktopState extends MusicBeatState
 									}
 							}
 							
-							if (FileSystem.exists(Paths.instEXcheck(i))) {
+							if (OpenFlAssets.exists(Paths.instEXcheck(i))) {
 								theText += '&-& %ex% &score:& %' + Highscore.getScore(songHighscore, 3) + '%\n';
 								if (Highscore.getMissesString(songHighscore, 3) == '0')
 									theText += '&-& %ex% &misses:& *Perfect!*\n';

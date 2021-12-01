@@ -29,27 +29,19 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
+
 import flixel.util.FlxSpriteUtil;
 import lime.app.Application;
 import openfl.Assets;
 import flash.geom.Point;
 import lime.app.Application;
+import openfl.utils.Assets as OpenFlAssets;
 
 #if windows
 import Discord.DiscordClient;
-import Sys;
-import sys.FileSystem;
-#end
-
-#if cpp
-import sys.thread.Thread;
 #end
 
 using StringTools;
-
-import polymod.Polymod;
-import polymod.Polymod.PolymodError;
 
 class BootupState extends MusicBeatState
 {
@@ -57,29 +49,10 @@ class BootupState extends MusicBeatState
 
 	override public function create():Void
 	{
-		/*#if polymod
-		var errors = (error:PolymodError) ->
-		{
-			trace(error.severity + ": " + error.code + " - " + error.message + " - ORIGIN: " + error.origin);
-		};
-
-		
-		polymod.Polymod.init({
-			modRoot: "mods", 
-			dirs: ['introMod'],
-			errorCallback: errors,
-			framework: OPENFL,
-			ignoredFiles: Polymod.getDefaultIgnoreList(),
-			frameworkParams: {
-			}
-		});
-		#end*/
-		
-		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
 		#end
-
+			
 		@:privateAccess
 		{
 			trace("Loaded " + openfl.Assets.getLibrary("default").assetsLoaded + " assets (DEFAULT)");
@@ -116,15 +89,7 @@ class BootupState extends MusicBeatState
 					case 'Dad-Battle': songHighscore = 'Dadbattle';
 					case 'Philly-Nice': songHighscore = 'Philly';
 			}
-			if (!loadedStuff) {
-				FlxG.sound.cache(Paths.inst(songHighscore));
-				if (FileSystem.exists(Paths.instEXcheck(songHighscore))) {
-					FlxG.sound.cache(Paths.instEX(songHighscore));
-				}
-			}
 		}
-		
-		loadedStuff = true;
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{

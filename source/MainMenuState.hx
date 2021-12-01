@@ -20,7 +20,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.math.FlxRandom;
 import flixel.addons.transition.FlxTransitionableState;
-import io.newgrounds.NG;
+
 import lime.app.Application;
 import flixel.math.FlxPoint;
 import flixel.math.FlxMath;
@@ -568,7 +568,9 @@ class MainMenuState extends MusicBeatState
 		else
 			controls.setKeyboardScheme(KeyboardScheme.Duo(true), true);
 
-		
+		#if mobileC
+		addVirtualPad(UP_DOWN, A_B);
+		#end		
 
 		super.create();
 		lock = new FlxSprite().loadGraphic(Paths.image('mainmenu/Lock'));

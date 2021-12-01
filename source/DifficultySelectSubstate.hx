@@ -13,13 +13,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import openfl.utils.Assets as OpenFlAssets;
 import openfl.geom.Point;
-
-#if windows
-import Sys;
-import sys.FileSystem;
-#end
-
 import openfl.Lib;
 
 class DifficultySelectSubstate extends MusicBeatSubstate
@@ -57,7 +52,7 @@ class DifficultySelectSubstate extends MusicBeatSubstate
 		bg.alpha = 0.2;
 		add(bg);
 
-		if (FileSystem.exists(Paths.instEXcheck(song))) 
+		if (OpenFlAssets.exists(Paths.instEXcheck(song))) 
 			hasEX = true;
 	
 		//please don't do this, use FlxTypedGroup, I"m just being dumb because I'm lazy

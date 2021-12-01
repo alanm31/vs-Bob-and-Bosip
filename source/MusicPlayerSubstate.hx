@@ -15,11 +15,10 @@ import flixel.tweens.FlxTween;
 import flixel.math.FlxMath;
 import openfl.geom.Point;
 import flixel.system.FlxSound;
+import openfl.utils.Assets as OpenFlAssets;
 
 #if windows
 import Discord.DiscordClient;
-import Sys;
-import sys.FileSystem;
 #end
 
 class MusicPlayerSubstate extends MusicBeatSubstate
@@ -138,7 +137,7 @@ class MusicPlayerSubstate extends MusicBeatSubstate
 				iconArray.push(data[1]);
 				trace(daJson.bpm);
 				songLength++;
-				if (FlxG.save.data.unlockedEX && FileSystem.exists(Paths.instEXcheck(data[0]))) {
+				if (FlxG.save.data.unlockedEX && OpenFlAssets.exists(Paths.instEXcheck(data[0]))) {
 					var daJson = Song.loadFromJson(data[0].toLowerCase() + '-ex', data[0].toLowerCase());
 					bpms.push(Std.int(daJson.bpm));
 					trace(daJson.bpm);
